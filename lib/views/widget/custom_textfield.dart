@@ -1,42 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// class CustomTextField extends StatelessWidget {
-//   final TextEditingController controller;
-//   final FocusNode? focusNode;
-//   final String label;
-//   final Widget prefixIcon; // Changed from IconData to Widget
-//   final bool isPassword;
-//   final TextInputType keyboardType;
-
-//   const CustomTextField({
-//     super.key,
-//     required this.controller,
-//     required this.focusNode,
-//     required this.label,
-//     required this.prefixIcon, // Required change
-//     this.isPassword = false,
-//     this.keyboardType = TextInputType.text,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return TextField(
-//       controller: controller,
-//       focusNode: focusNode,
-//       obscureText: isPassword,
-//       keyboardType: keyboardType,
-//       decoration: InputDecoration(
-//         labelText: label,
-//         labelStyle: const TextStyle(fontWeight: FontWeight.w500),
-//         border: OutlineInputBorder(
-//           borderRadius: BorderRadius.circular(12),
-//         ),
-//         prefixIcon: prefixIcon, // Now accepts any Widget
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -44,8 +5,8 @@ class CustomTextField extends StatefulWidget {
   final FocusNode? focusNode;
   final String label;
   final Widget prefixIcon;
-  final Widget? suffixiconvisble;    
-  final Widget? suffixiconNotvisble;  
+  final Widget? suffixiconvisble;
+  final Widget? suffixiconNotvisble;
   final bool isPassword;
   final TextInputType keyboardType;
 
@@ -79,13 +40,30 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return TextField(
       controller: widget.controller,
       focusNode: widget.focusNode,
+      cursorColor: Colors.green,
       obscureText: _obscureText,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
         labelText: widget.label,
-        labelStyle: const TextStyle(fontWeight: FontWeight.w500),
+        labelStyle: const TextStyle(
+          fontWeight: FontWeight.w500,
+          color: Colors.black54, 
+        ),
+        floatingLabelStyle: TextStyle(
+          color: Colors.black45, 
+          fontWeight: FontWeight.w400,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
+        ),
+        hintStyle: TextStyle(color: Colors.grey),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.green, width: 1),
         ),
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPassword
@@ -93,7 +71,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 color: Colors.transparent,
                 child: InkWell(
                   borderRadius:
-                      BorderRadius.circular(30), // Circular ripple effect
+                      BorderRadius.circular(30), 
                   onTap: () {
                     setState(() {
                       _obscureText = !_obscureText;
