@@ -4,3 +4,5 @@ ios/** linguist-vendored
 macos/** linguist-vendored
 linux/** linguist-vendored
 windows/** linguist-vendored
+web/** linguist-vendored
+assets/**/*.html linguist-vendored
