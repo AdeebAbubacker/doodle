@@ -32,10 +32,8 @@ class ApiService {
     );
 
     if (response.statusCode == 200) {
-      print('success ${response.body.toString()}');
       return jsonDecode(response.body);
     } else {
-      print('failure ${response.body.toString()}');
       throw Exception('Failed to register');
     }
   }

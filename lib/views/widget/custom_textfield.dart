@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
+  final FocusNode? focusNode;
   final String label;
   final IconData icon;
   final bool isPassword;
@@ -10,6 +11,7 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
     required this.controller,
+    required this.focusNode,
     required this.label,
     required this.icon,
     this.isPassword = false,
@@ -20,6 +22,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      focusNode: focusNode,
       obscureText: isPassword,
       keyboardType: keyboardType,
       decoration: InputDecoration(
