@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'MVVM Bloc Demo',
         theme: ThemeData(
-          textTheme: GoogleFonts.ubuntuTextTheme(), // apply Ubuntu globally
+          textTheme: GoogleFonts.ubuntuTextTheme(), 
         ),
         initialRoute: '/',
         routes: {
