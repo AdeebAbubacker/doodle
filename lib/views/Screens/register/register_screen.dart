@@ -46,7 +46,7 @@ class _RegisterFormState extends State<RegisterForm> {
       return;
     }
 
-    context.read<RegisterCubit>().regsiter(email, password);
+    context.read<RegisterCubit>().register(email, password);
   }
 
   @override
@@ -60,26 +60,24 @@ class _RegisterFormState extends State<RegisterForm> {
         body: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
-            child: BlocConsumer<RegisterCubit, RegsiterState>(
+            child: BlocConsumer<RegisterCubit, RegisterState>(
               listener: (context, state) {
-                if (state == RegsiterState.success) {
+                if (state is RegisterSuccess) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Registration successful!')),
                   );
                   Navigator.pop(context);
-                } else if (state == RegsiterState.userNotinDb) {
+                } else if (state is RegisterUserNotInDb) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('User Not in DB')),
+                    const SnackBar(content: Text('User not in DB')),
                   );
-                } else if (state == RegsiterState.noInternet) {
+                } else if (state is RegisterNoInternet) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('No Internt')),
+                    const SnackBar(content: Text('No Internet')),
                   );
-                } else if (state == RegsiterState.failure) {
+                } else if (state is RegisterFailure) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Registration failed. Please try again.'),
-                    ),
+                    SnackBar(content: Text(state.message)),
                   );
                 }
               },
@@ -152,7 +150,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     CustomButton(
                       onPressed: _register,
                       label: 'Register',
-                      isLoading: state == RegsiterState.loading,
+                      isLoading: state is RegisterLoading,
                     ),
                     const SizedBox(height: 20),
 

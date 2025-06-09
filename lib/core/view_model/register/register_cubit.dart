@@ -1,41 +1,60 @@
 import 'package:doodle/core/services/api_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dartz/dartz.dart';
 
-enum RegsiterState {
-  initial,
-  loading,
-  success,
-  failure,
-  noInternet,
-  userNotinDb
+abstract class RegisterState {}
+
+class RegisterInitial extends RegisterState {}
+
+class RegisterLoading extends RegisterState {}
+
+class RegisterSuccess extends RegisterState {
+  final String token;
+  RegisterSuccess(this.token);
 }
 
-class RegisterCubit extends Cubit<RegsiterState> {
+class RegisterFailure extends RegisterState {
+  final String message;
+  RegisterFailure(this.message);
+}
+
+class RegisterNoInternet extends RegisterState {}
+
+class RegisterUserNotInDb extends RegisterState {}
+
+class RegisterCubit extends Cubit<RegisterState> {
   final ApiService _apiService;
 
-  RegisterCubit(this._apiService) : super(RegsiterState.initial);
+  RegisterCubit(this._apiService) : super(RegisterInitial());
 
-  Future<void> regsiter(String email, String password) async {
-    emit(RegsiterState.loading);
+  Future<void> register(String email, String password) async {
+    emit(RegisterLoading());
+
     try {
-      final data = await _apiService.register(email, password);
-      if (data['token'] != null) {
-        emit(RegsiterState.success);
-      } else if (data['error'] != null &&
-          data['error']
-              .toString()
-              .contains('Only defined users succeed registration')) {
-        // specific error detected
-        emit(RegsiterState.userNotinDb);
-      } else {
-        emit(RegsiterState.failure);
-      }
+      final Either<String, Map<String, dynamic>> result =
+          await _apiService.register(email, password);
+
+      result.fold(
+        (failure) {
+          if (failure.contains('No internet')) {
+            emit(RegisterNoInternet());
+          } else if (failure
+              .contains('Note: Only defined users succeed registration')) {
+            emit(RegisterUserNotInDb());
+          } else {
+            emit(RegisterFailure(failure));
+          }
+        },
+        (data) {
+          if (data['token'] != null) {
+            emit(RegisterSuccess(data['token']));
+          } else {
+            emit(RegisterFailure('Invalid response from server'));
+          }
+        },
+      );
     } catch (e) {
-      if (e.toString().contains('No internet')) {
-        emit(RegsiterState.noInternet);
-      } else {
-        emit(RegsiterState.failure);
-      }
+      emit(RegisterFailure('Unexpected error: $e'));
     }
   }
 }

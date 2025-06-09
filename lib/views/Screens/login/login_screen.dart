@@ -26,15 +26,15 @@ class LoginScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         body: BlocListener<LoginCubit, LoginState>(
           listener: (context, state) {
-            if (state == LoginState.success) {
+            if (state is LoginSuccess) {
               Navigator.pushReplacementNamed(context, '/home');
-            } else if (state == LoginState.noInternet) {
+            } else if (state is LoginNoInternet) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('No Internet')),
               );
-            } else if (state == LoginState.failure) {
+            } else if (state is LoginFailure) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Login Failed ${state.name}')),
+                SnackBar(content: Text('Login Failed: ${state.message}')),
               );
             }
           },
@@ -119,7 +119,7 @@ class LoginScreen extends StatelessWidget {
                               );
                         },
                         label: 'Login',
-                        isLoading: state == LoginState.loading,
+                        isLoading: state is LoginLoading,
                       );
                     },
                   ),

@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => UserCubit(getIt<ApiService>())..fetchUsers(),
+      create: (_) => UserCubit(getIt<ApiService>())..fetchUsers(2),
       child: Scaffold(
         backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
             if (state is UserLoading) {
               return const Center(child: CircularProgressIndicator());
             }
-            if (state is UserNoInterNet) {
+            if (state is UserNoInternet) {
               return const Center(child: Text("No Internet"));
             }
 
@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                 backgroundColor: Colors.white,
                 color: Colors.green,
                 onRefresh: () async {
-                  context.read<UserCubit>().fetchUsers();
+                  context.read<UserCubit>().fetchUsers(2);
                 },
                 child: ListView.builder(
                   padding: const EdgeInsets.all(16),
@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     ElevatedButton.icon(
-                      onPressed: () => context.read<UserCubit>().fetchUsers(),
+                      onPressed: () => context.read<UserCubit>().fetchUsers(2),
                       icon: const Icon(Icons.refresh),
                       label: const Text('Try Again'),
                     )
