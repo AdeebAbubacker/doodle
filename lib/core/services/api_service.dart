@@ -1,35 +1,52 @@
-import 'package:dio/dio.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:doodle/core/utils/constants.dart';
 
 class ApiService {
-  final Dio _dio = Dio(
-    BaseOptions(
-      baseUrl: ApiConstants.baseUrl,
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ApiConstants.apiKey,
-      },
-    ),
-  );
+  final Map<String, String> _headers = {
+    'Content-Type': 'application/json',
+    'x-api-key': ApiConstants.apiKey,
+  };
 
   Future<Map<String, dynamic>> login(String email, String password) async {
-    final response = await _dio.post(
-      'login',
-      data: {'email': email, 'password': password},
+    final url = Uri.parse('${ApiConstants.baseUrl}login');
+    final response = await http.post(
+      url,
+      headers: _headers,
+      body: jsonEncode({'email': email, 'password': password}),
     );
-    return response.data;
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to login');
+    }
   }
 
   Future<Map<String, dynamic>> register(String email, String password) async {
-    final response = await _dio.post(
-      'register',
-      data: {'email': email, 'password': password},
+    final url = Uri.parse('${ApiConstants.baseUrl}register');
+    final response = await http.post(
+      url,
+      headers: _headers,
+      body: jsonEncode({'email': email, 'password': password}),
     );
-    return response.data;
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to register');
+    }
   }
 
   Future<List<dynamic>> getUsers(int page) async {
-    final response = await _dio.get('users', queryParameters: {'page': page});
-    return response.data['data'];
+    final url = Uri.parse('${ApiConstants.baseUrl}users?page=$page');
+    final response = await http.get(url, headers: _headers);
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return data['data'] ?? [];
+    } else {
+      throw Exception('Failed to load users');
+    }
   }
 }

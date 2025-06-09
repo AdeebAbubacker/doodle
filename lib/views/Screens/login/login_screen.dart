@@ -16,52 +16,49 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => LoginCubit(getIt<ApiService>()),
-      child: Scaffold(
-        appBar: AppBar(title: Text('Login')),
-        body: BlocListener<LoginCubit, LoginState>(
-          listener: (context, state) {
-            if (state == LoginState.success) {
-              Navigator.pushReplacementNamed(context, '/home');
-            } else if (state == LoginState.failure) {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text('Login Failed')));
-            }
-          },
-          child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              children: [
-                TextField(
-                  controller: emailController,
-                  decoration: InputDecoration(labelText: 'Email'),
-                ),
-                TextField(
-                  controller: passwordController,
-                  decoration: InputDecoration(labelText: 'Password'),
-                  obscureText: true,
-                ),
-                SizedBox(height: 20),
-                BlocBuilder<LoginCubit, LoginState>(
-                  builder: (context, state) {
-                    if (state == LoginState.loading) {
-                      return CircularProgressIndicator();
-                    }
-                    return ElevatedButton(
-                      onPressed: () {
-                        context.read<LoginCubit>().login(
-                          emailController.text,
-                          passwordController.text,
-                        );
-                      },
-                      child: Text('Login'),
-                    );
-                  },
-                ),
-              ],
-            ),
+    return Scaffold(
+      appBar: AppBar(title: Text('Login')),
+      body: BlocListener<LoginCubit, LoginState>(
+        listener: (context, state) {
+          if (state == LoginState.success) {
+            Navigator.pushReplacementNamed(context, '/home');
+          } else if (state == LoginState.failure) {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text('Login Failed')));
+          }
+        },
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              TextField(
+                controller: emailController,
+                decoration: InputDecoration(labelText: 'Email'),
+              ),
+              TextField(
+                controller: passwordController,
+                decoration: InputDecoration(labelText: 'Password'),
+                obscureText: true,
+              ),
+              SizedBox(height: 20),
+              BlocBuilder<LoginCubit, LoginState>(
+                builder: (context, state) {
+                  if (state == LoginState.loading) {
+                    return CircularProgressIndicator();
+                  }
+                  return ElevatedButton(
+                    onPressed: () {
+                      context.read<LoginCubit>().login(
+                        emailController.text,
+                        passwordController.text,
+                      );
+                    },
+                    child: Text('Login'),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),
