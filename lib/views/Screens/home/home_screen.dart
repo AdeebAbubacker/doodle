@@ -21,12 +21,18 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text(
             'Welcome 👋',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
           backgroundColor: Colors.green.shade600,
           actions: [
             IconButton(
-              icon: const Icon(Icons.logout),
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
               tooltip: 'Logout',
               onPressed: () => _logout(context),
             )
@@ -40,6 +46,8 @@ class HomeScreen extends StatelessWidget {
 
             if (state is UserLoaded) {
               return RefreshIndicator(
+                backgroundColor: Colors.white,
+                color: Colors.green,
                 onRefresh: () async {
                   context.read<UserCubit>().fetchUsers();
                 },
