@@ -1,4 +1,6 @@
 import 'package:doodle/core/view_model/login/login_cubit.dart';
+import 'package:doodle/views/widget/custom_button.dart';
+import 'package:doodle/views/widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,7 +16,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       backgroundColor: Colors.white,
       body: BlocListener<LoginCubit, LoginState>(
@@ -37,98 +38,86 @@ class LoginScreen extends StatelessWidget {
                 Center(
                   child: Image.asset(
                     'assets/help.png',
-                    height: 300,
+                    height: 250,
                     width: double.infinity,
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 32),
 
                 // Title
                 Text(
                   'Welcome Back',
+                  style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   'Login to your account',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
                 const SizedBox(height: 32),
 
-                // Email
-                TextField(
+                CustomTextField(
                   controller: emailController,
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    prefixIcon: const Icon(Icons.email),
-                  ),
+                  label: 'Email',
+                  icon: Icons.email,
                   keyboardType: TextInputType.emailAddress,
                 ),
+
                 const SizedBox(height: 16),
 
-                // Password
-                TextField(
+                CustomTextField(
                   controller: passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    prefixIcon: const Icon(Icons.lock),
-                  ),
+                  label: 'Password',
+                  icon: Icons.lock,
+                  isPassword: true,
                 ),
+
                 const SizedBox(height: 24),
 
                 // Login Button
                 BlocBuilder<LoginCubit, LoginState>(
                   builder: (context, state) {
-                    return SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: state == LoginState.loading
-                            ? null
-                            : () {
-                                context.read<LoginCubit>().login(
-                                      emailController.text,
-                                      passwordController.text,
-                                    );
-                              },
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        child: state == LoginState.loading
-                            ? const CircularProgressIndicator(
-                                color: Colors.white,
-                              )
-                            : const Text('Login'),
-                      ),
+                    return CustomButton(
+                      onPressed: () {
+                        context.read<LoginCubit>().login(
+                              emailController.text,
+                              passwordController.text,
+                            );
+                      },
+                      label: 'Login',
+                      isLoading: state == LoginState.loading,
                     );
                   },
                 ),
                 const SizedBox(height: 16),
 
-                // // Register Button
-                // TextButton(
-                //   onPressed: () {
-                //     Navigator.pushNamed(context, '/register');
-                //   },
-                //   child: const Text("Don't have an account? Register"),
-                // ),
-                // Already have account
+                // Register prompt
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have an account?"),
+                    const Text(
+                      "Don't have an account?",
+                      style: TextStyle(fontSize: 14),
+                    ),
                     TextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/register');
                       },
-                      child: const Text('Register'),
+                      child: const Text(
+                        'Register',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
                     ),
                   ],
                 ),

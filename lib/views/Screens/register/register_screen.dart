@@ -1,4 +1,6 @@
 import 'package:doodle/core/view_model/register/register_cubit.dart';
+import 'package:doodle/views/widget/custom_button.dart';
+import 'package:doodle/views/widget/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,8 +47,6 @@ class _RegisterFormState extends State<RegisterForm> {
 
   @override
   Widget build(BuildContext context) {
-  
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -79,64 +79,49 @@ class _RegisterFormState extends State<RegisterForm> {
                       width: double.infinity,
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 8),
 
                   // Title
                   Text(
                     'Create Account',
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'Fill in your details to register',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black54,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   const SizedBox(height: 32),
 
-                  // Email
-                  TextField(
+                  CustomTextField(
                     controller: _emailController,
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      prefixIcon: const Icon(Icons.email),
-                    ),
+                    label: 'Email',
+                    icon: Icons.email,
                     keyboardType: TextInputType.emailAddress,
                   ),
+
                   const SizedBox(height: 16),
 
-                  // Password
-                  TextField(
+                  CustomTextField(
                     controller: _passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      prefixIcon: const Icon(Icons.lock),
-                    ),
+                    label: 'Password',
+                    icon: Icons.lock,
+                    isPassword: true,
                   ),
                   const SizedBox(height: 24),
 
-                  // Register Button
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed:
-                          state == RegsiterState.loading ? null : _register,
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      child: state == RegsiterState.loading
-                          ? const CircularProgressIndicator(
-                              color: Colors.white,
-                            )
-                          : const Text('Register'),
-                    ),
+                  CustomButton(
+                    onPressed: _register,
+                    label: 'Register',
+                    isLoading: state == RegsiterState.loading,
                   ),
                   const SizedBox(height: 20),
 
