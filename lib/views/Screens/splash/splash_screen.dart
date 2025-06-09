@@ -2,11 +2,14 @@ import 'package:doodle/core/view_model/splash/splash_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeColor = Colors.green.shade600;
+
     return BlocListener<SplashCubit, SplashState>(
       listener: (context, state) {
         if (state == SplashState.loaded) {
@@ -14,42 +17,63 @@ class SplashScreen extends StatelessWidget {
         }
       },
       child: Scaffold(
-        body: Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF4A00E0), Color(0xFF8E2DE2)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Logo
-              Image.asset('assets/splash_logo.png', height: 120),
-
-              const SizedBox(height: 24),
-
-              // App name
-              const Text(
-                "SwiftCRM",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.5,
+        backgroundColor: themeColor,
+        body: SafeArea(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Logo
+                Center(
+                  child: Image.asset(
+                    'assets/splash_logo.png',
+                    height: 200,
+                    width: double.infinity,
+                    fit: BoxFit.contain,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
+                // Image.asset(
+                //   'assets/splash_logo.png',
+                //   height: 120,
+                //   fit: BoxFit.contain,
+                //   color: Colors.white,
+                // ),
 
-              const SizedBox(height: 40),
+                const SizedBox(height: 32),
 
-              // Loader
-              const CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              ),
-            ],
+                // App name
+                Text(
+                  "Reqres CRM",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+
+                const SizedBox(height: 40),
+
+                // Subtext or tagline (optional)
+                Text(
+                  "Simplify your customer relationships",
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+
+                const SizedBox(height: 48),
+
+                // Loader
+                const CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  strokeWidth: 3,
+                ),
+              ],
+            ),
           ),
         ),
       ),
