@@ -113,7 +113,13 @@ class _RegisterFormState extends State<RegisterForm> {
                       controller: _emailController,
                       focusNode: emailFocusNode,
                       label: 'Email',
-                      icon: Icons.email,
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Image.asset(
+                          'assets/email.png',
+                          width: 10,
+                        ), // or NetworkImage
+                      ),
                       keyboardType: TextInputType.emailAddress,
                     ),
 
@@ -123,7 +129,21 @@ class _RegisterFormState extends State<RegisterForm> {
                       controller: _passwordController,
                       focusNode: passwordFocusNode,
                       label: 'Password',
-                      icon: Icons.lock,
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Image.asset(
+                          'assets/padlock.png',
+                          width: 10,
+                        ), // or NetworkImage
+                      ),
+                      suffixiconvisble: Image.asset(
+                        'assets/witness.png',
+                        width: 10,
+                      ), //
+                      suffixiconNotvisble: Image.asset(
+                        'assets/hide.png',
+                        width: 10,
+                      ), // or
                       isPassword: true,
                     ),
                     const SizedBox(height: 24),
