@@ -6,6 +6,7 @@ import 'package:doodle/core/view_model/splash/splash_cubit.dart';
 import 'package:doodle/core/view_model/user/user_cubit.dart';
 import 'package:doodle/views/Screens/home/home_screen.dart';
 import 'package:doodle/views/Screens/login/login_screen.dart';
+import 'package:doodle/views/Screens/register/register_screen.dart';
 import 'package:doodle/views/Screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,11 +34,12 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'MVVM Bloc Demo',
         theme: ThemeData(
-          textTheme: GoogleFonts.ubuntuTextTheme(), 
+          textTheme: GoogleFonts.ubuntuTextTheme(),
         ),
         initialRoute: '/',
         routes: {
           '/': (context) => SplashScreen(),
+          '/register': (context) => RegisterPage(),
           '/login': (context) => LoginScreen(),
           '/home': (context) => HomeScreen(),
         },
