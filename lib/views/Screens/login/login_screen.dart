@@ -179,12 +179,25 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // Register Button
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/register');
-                  },
-                  child: const Text("Don't have an account? Register"),
+                // // Register Button
+                // TextButton(
+                //   onPressed: () {
+                //     Navigator.pushNamed(context, '/register');
+                //   },
+                //   child: const Text("Don't have an account? Register"),
+                // ),
+                // Already have account
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Don't have an account?"),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/register');
+                      },
+                      child: const Text('Register'),
+                    ),
+                  ],
                 ),
               ],
             ),
