@@ -8,7 +8,7 @@ class RegisterCubit extends Cubit<RegsiterState> {
 
   RegisterCubit(this._apiService) : super(RegsiterState.initial);
 
-  Future<void> login(String email, String password) async {
+  Future<void> regsiter(String email, String password) async {
     emit(RegsiterState.loading);
     try {
       final data = await _apiService.register(email, password);

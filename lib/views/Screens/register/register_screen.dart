@@ -137,7 +137,7 @@ class _RegisterFormState extends State<RegisterForm> {
       return;
     }
 
-    context.read<RegisterCubit>().login(email, password);
+    context.read<RegisterCubit>().regsiter(email, password);
   }
 
   @override

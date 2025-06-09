@@ -22,12 +22,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final apiService = ApiService();
     return MultiBlocProvider(
       providers: [
-        BlocProvider<RegisterCubit>(create: (_) => RegisterCubit(apiService)),
-        BlocProvider<LoginCubit>(create: (_) => LoginCubit(apiService)),
-        BlocProvider<UserCubit>(create: (_) => UserCubit(apiService)),
+        BlocProvider<RegisterCubit>(create: (_) => getIt<RegisterCubit>()),
+        BlocProvider<LoginCubit>(create: (_) => getIt<LoginCubit>()),
+        BlocProvider<UserCubit>(create: (_) => getIt<UserCubit>()),
         BlocProvider<SplashCubit>(create: (_) => SplashCubit()..loadSplash()),
       ],
       child: MaterialApp(
