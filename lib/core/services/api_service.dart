@@ -33,6 +33,9 @@ class ApiService {
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
+    } else if (response.statusCode == 400) {
+      // decode and return error message
+      return jsonDecode(response.body);
     } else {
       throw Exception('Failed to register');
     }

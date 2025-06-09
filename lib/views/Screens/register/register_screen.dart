@@ -66,6 +66,10 @@ class _RegisterFormState extends State<RegisterForm> {
                     const SnackBar(content: Text('Registration successful!')),
                   );
                   Navigator.pop(context); // Navigate back to login screen
+                } else if (state == RegsiterState.userNotinDb) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('User Not in DB')),
+                  );
                 } else if (state == RegsiterState.failure) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
@@ -134,7 +138,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         child: Image.asset(
                           'assets/padlock.png',
                           width: 10,
-                        ), // or NetworkImage
+                        ),
                       ),
                       suffixiconvisble: Image.asset(
                         'assets/witness.png',
