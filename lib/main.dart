@@ -3,6 +3,7 @@ import 'package:doodle/views/Screens/home/home_screen.dart';
 import 'package:doodle/views/Screens/login/login_screen.dart';
 import 'package:doodle/views/Screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   setup();
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'MVVM Bloc Demo',
+      theme: ThemeData(
+        textTheme: GoogleFonts.ubuntuTextTheme(), // apply Ubuntu globally
+      ),
       initialRoute: '/',
       routes: {
         '/': (context) => SplashScreen(),

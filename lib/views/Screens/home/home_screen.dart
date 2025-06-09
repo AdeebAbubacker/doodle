@@ -21,15 +21,28 @@ class HomeScreen extends StatelessWidget {
             }
             if (state is UserLoaded) {
               return ListView.builder(
+                physics: BouncingScrollPhysics(),
+                shrinkWrap: true,
                 itemCount: state.users.length,
                 itemBuilder: (context, index) {
                   User user = state.users[index];
+                  final avatar = user.avatar ?? '';
+                  final firstName = user.firstName ?? 'No First';
+                  final lastName = user.lastName ?? 'Name';
+                  final email = user.email ?? 'No email available';
                   return ListTile(
                     leading: CircleAvatar(
-                      backgroundImage: NetworkImage(user.avatar),
+                      backgroundImage:
+                          (avatar.isNotEmpty)
+                              ? NetworkImage(avatar)
+                              : null, // Use null if no image
+                      child:
+                          (avatar.isEmpty)
+                              ? const Icon(Icons.person, color: Colors.white)
+                              : null, // Show icon only if no avatar
                     ),
-                    title: Text('${user.firstName} ${user.lastName}'),
-                    subtitle: Text(user.email),
+                    title: Text('$firstName $lastName'),
+                    subtitle: Text(email),
                   );
                 },
               );
