@@ -1,7 +1,14 @@
 import 'package:doodle/core/services/api_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum RegsiterState { initial, loading, success, failure, userNotinDb }
+enum RegsiterState {
+  initial,
+  loading,
+  success,
+  failure,
+  noInternet,
+  userNotinDb
+}
 
 class RegisterCubit extends Cubit<RegsiterState> {
   final ApiService _apiService;
@@ -24,7 +31,11 @@ class RegisterCubit extends Cubit<RegsiterState> {
         emit(RegsiterState.failure);
       }
     } catch (e) {
-      emit(RegsiterState.failure);
+      if (e.toString().contains('No internet')) {
+        emit(RegsiterState.noInternet);
+      } else {
+        emit(RegsiterState.failure);
+      }
     }
   }
 }

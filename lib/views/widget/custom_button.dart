@@ -1,3 +1,5 @@
+import 'package:doodle/core/const/colors.dart';
+import 'package:doodle/core/const/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -11,7 +13,7 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     required this.label,
     this.isLoading = false,
-    this.backgroundColor = const Color(0xFF4CAF50), // Default to green
+    this.backgroundColor = AppColors.greenF50, // Default to green
   });
 
   @override
@@ -28,16 +30,13 @@ class CustomButton extends StatelessWidget {
           ),
         ),
         child: isLoading
-            ? const CircularProgressIndicator(
-                color: Colors.white,
+            ?  CircularProgressIndicator(
+                color: AppColors.white,
                 strokeWidth: 2,
               )
             : Text(
                 label,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: AppTextStyles.whiteWboldS16,
               ),
       ),
     );

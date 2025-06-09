@@ -1,3 +1,4 @@
+import 'package:doodle/core/const/text_styles.dart';
 import 'package:doodle/core/view_model/register/register_cubit.dart';
 import 'package:doodle/views/widget/custom_button.dart';
 import 'package:doodle/views/widget/custom_textfield.dart';
@@ -65,10 +66,14 @@ class _RegisterFormState extends State<RegisterForm> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Registration successful!')),
                   );
-                  Navigator.pop(context); // Navigate back to login screen
+                  Navigator.pop(context);
                 } else if (state == RegsiterState.userNotinDb) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('User Not in DB')),
+                  );
+                } else if (state == RegsiterState.noInternet) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('No Internt')),
                   );
                 } else if (state == RegsiterState.failure) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -96,20 +101,12 @@ class _RegisterFormState extends State<RegisterForm> {
                     // Title
                     Text(
                       'Create Account',
-                      style: TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                      ),
+                      style: AppTextStyles.blackW700S26,
                     ),
                     const SizedBox(height: 8),
                     Text(
                       'Fill in your details to register',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: AppTextStyles.blackW500S16,
                     ),
                     const SizedBox(height: 32),
 

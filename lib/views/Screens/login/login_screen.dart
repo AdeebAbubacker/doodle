@@ -1,3 +1,4 @@
+import 'package:doodle/core/const/text_styles.dart';
 import 'package:doodle/core/view_model/login/login_cubit.dart';
 import 'package:doodle/views/widget/custom_button.dart';
 import 'package:doodle/views/widget/custom_textfield.dart';
@@ -27,6 +28,10 @@ class LoginScreen extends StatelessWidget {
           listener: (context, state) {
             if (state == LoginState.success) {
               Navigator.pushReplacementNamed(context, '/home');
+            } else if (state == LoginState.noInternet) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('No Internet')),
+              );
             } else if (state == LoginState.failure) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Login Failed ${state.name}')),
@@ -54,20 +59,12 @@ class LoginScreen extends StatelessWidget {
                   // Title
                   Text(
                     'Welcome Back',
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
+                    style: AppTextStyles.blackW700S26,
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'Login to your account',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black54,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: AppTextStyles.blackW500S16,
                   ),
                   const SizedBox(height: 32),
 
@@ -99,11 +96,11 @@ class LoginScreen extends StatelessWidget {
                       ), // or NetworkImage
                     ),
                     suffixiconvisble: Image.asset(
-                    'assets/witness.png',
+                      'assets/witness.png',
                       width: 10,
                     ), //
                     suffixiconNotvisble: Image.asset(
-                       'assets/hide.png',
+                      'assets/hide.png',
                       width: 10,
                     ), // or
                     isPassword: true,

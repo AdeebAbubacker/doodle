@@ -1,3 +1,4 @@
+import 'package:doodle/core/const/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -40,38 +41,44 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return TextField(
       controller: widget.controller,
       focusNode: widget.focusNode,
-      cursorColor: Colors.green,
+      cursorColor: AppColors.normalGreen,
       obscureText: _obscureText,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
         labelText: widget.label,
         labelStyle: const TextStyle(
           fontWeight: FontWeight.w500,
-          color: Colors.black54, 
+          color: AppColors.black54,
         ),
         floatingLabelStyle: TextStyle(
-          color: Colors.black45, 
+          color: AppColors.black45,
           fontWeight: FontWeight.w400,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-        hintStyle: TextStyle(color: Colors.grey),
+        hintStyle: TextStyle(
+          color: AppColors.grey,
+        ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey),
+          borderSide: BorderSide(
+            color: AppColors.grey,
+          ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.green, width: 1),
+          borderSide: BorderSide(
+            color: AppColors.normalGreen,
+            width: 1,
+          ),
         ),
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPassword
             ? Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  borderRadius:
-                      BorderRadius.circular(30), 
+                  borderRadius: BorderRadius.circular(30),
                   onTap: () {
                     setState(() {
                       _obscureText = !_obscureText;

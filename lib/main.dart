@@ -1,3 +1,4 @@
+import 'package:doodle/core/const/colors.dart';
 import 'package:doodle/core/di/injection.dart';
 import 'package:doodle/core/view_model/login/login_cubit.dart';
 import 'package:doodle/core/view_model/register/register_cubit.dart';
@@ -34,19 +35,21 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.ubuntuTextTheme(),
           textButtonTheme: TextButtonThemeData(
             style: TextButton.styleFrom(
-              foregroundColor: Colors.green.shade600,
+              foregroundColor: AppColors.primaryGreen47,
             ),
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green.shade600,
+              backgroundColor: AppColors.primaryGreen47,
               foregroundColor: Colors.white,
             ),
           ),
           outlinedButtonTheme: OutlinedButtonThemeData(
             style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.green.shade600,
-              side: BorderSide(color: Colors.green.shade600),
+              foregroundColor: AppColors.primaryGreen47,
+              side: BorderSide(
+                color: AppColors.primaryGreen47,
+              ),
             ),
           ),
         ),

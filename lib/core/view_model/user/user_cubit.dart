@@ -8,6 +8,8 @@ class UserInitial extends UserState {}
 
 class UserLoading extends UserState {}
 
+class UserNoInterNet extends UserState {}
+
 class UserLoaded extends UserState {
   final List<User> users;
   UserLoaded(this.users);
@@ -27,7 +29,11 @@ class UserCubit extends Cubit<UserState> {
       final users = data.map((u) => User.fromJson(u)).toList();
       emit(UserLoaded(users));
     } catch (e) {
-      emit(UserError());
+      if (e.toString().contains('No internet')) {
+        emit(UserNoInterNet());
+      } else {
+        emit(UserError());
+      }
     }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:doodle/core/const/text_styles.dart';
 import 'package:doodle/core/di/injection.dart';
 import 'package:doodle/core/services/api_service.dart';
 import 'package:doodle/core/view_model/user/user_cubit.dart';
@@ -42,6 +43,9 @@ class HomeScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is UserLoading) {
               return const Center(child: CircularProgressIndicator());
+            }
+            if (state is UserNoInterNet) {
+              return const Center(child: Text("No Internet"));
             }
 
             if (state is UserLoaded) {
@@ -121,7 +125,7 @@ class _UserCard extends StatelessWidget {
         ),
         title: Text(
           fullName,
-          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+          style: AppTextStyles.blackW600S16,
         ),
         subtitle: Text(
           email,
