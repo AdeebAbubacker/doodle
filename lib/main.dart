@@ -1,5 +1,4 @@
 import 'package:doodle/core/di/injection.dart';
-import 'package:doodle/core/services/api_service.dart';
 import 'package:doodle/core/view_model/login/login_cubit.dart';
 import 'package:doodle/core/view_model/register/register_cubit.dart';
 import 'package:doodle/core/view_model/splash/splash_cubit.dart';
@@ -31,9 +30,25 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'MVVM Bloc Demo',
         theme: ThemeData(
           textTheme: GoogleFonts.ubuntuTextTheme(),
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.green.shade600,
+            ),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green.shade600,
+              foregroundColor: Colors.white,
+            ),
+          ),
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+              foregroundColor: Colors.green.shade600,
+              side: BorderSide(color: Colors.green.shade600),
+            ),
+          ),
         ),
         initialRoute: '/',
         routes: {
