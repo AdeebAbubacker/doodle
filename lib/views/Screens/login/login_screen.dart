@@ -2,8 +2,10 @@ import 'package:doodle/core/const/text_styles.dart';
 import 'package:doodle/core/view_model/login/login_cubit.dart';
 import 'package:doodle/views/widget/custom_button.dart';
 import 'package:doodle/views/widget/custom_textfield.dart';
+import 'package:doodle/views/widget/flush_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:another_flushbar/flushbar.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController(
@@ -27,14 +29,26 @@ class LoginScreen extends StatelessWidget {
         body: BlocListener<LoginCubit, LoginState>(
           listener: (context, state) {
             if (state is LoginSuccess) {
+              FlushbarHelper.show(
+                context,
+                status: true,
+                title: 'Login Successful',
+                content: 'Welcome back! You have been logged in successfully.',
+              );
               Navigator.pushReplacementNamed(context, '/home');
             } else if (state is LoginNoInternet) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('No Internet')),
+              FlushbarHelper.show(
+                context,
+                status: false,
+                title: 'No Internet Connection',
+                content: 'Please check your network and try again.',
               );
             } else if (state is LoginFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Login Failed: ${state.message}')),
+              FlushbarHelper.show(
+                context,
+                status: false,
+                title: 'Invalid Credentials',
+                content: 'The email or password you entered is incorrect.',
               );
             }
           },
@@ -53,10 +67,7 @@ class LoginScreen extends StatelessWidget {
                       fit: BoxFit.contain,
                     ),
                   ),
-
                   const SizedBox(height: 32),
-
-                
                   Text(
                     'Welcome Back',
                     style: AppTextStyles.blackW700S26,
@@ -67,7 +78,6 @@ class LoginScreen extends StatelessWidget {
                     style: AppTextStyles.blackW500S16,
                   ),
                   const SizedBox(height: 32),
-
                   CustomTextField(
                     controller: emailController,
                     focusNode: emailFocusNode,
@@ -77,13 +87,11 @@ class LoginScreen extends StatelessWidget {
                       child: Image.asset(
                         'assets/email.png',
                         width: 10,
-                      ), 
+                      ),
                     ),
                     keyboardType: TextInputType.emailAddress,
                   ),
-
                   const SizedBox(height: 16),
-
                   CustomTextField(
                     controller: passwordController,
                     focusNode: passwordFocusNode,
@@ -105,9 +113,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     isPassword: true,
                   ),
-
                   const SizedBox(height: 24),
-
                   BlocBuilder<LoginCubit, LoginState>(
                     builder: (context, state) {
                       return CustomButton(
@@ -123,8 +129,6 @@ class LoginScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 16),
-
-             
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

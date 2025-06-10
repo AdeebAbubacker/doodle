@@ -2,6 +2,7 @@ import 'package:doodle/core/const/text_styles.dart';
 import 'package:doodle/core/view_model/register/register_cubit.dart';
 import 'package:doodle/views/widget/custom_button.dart';
 import 'package:doodle/views/widget/custom_textfield.dart';
+import 'package:doodle/views/widget/flush_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,8 +41,11 @@ class _RegisterFormState extends State<RegisterForm> {
     final password = _passwordController.text.trim();
 
     if (email.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fill in all fields')),
+      FlushbarHelper.show(
+        context,
+        status: false,
+        title: 'User details required',
+        content: 'Please fill in all fields',
       );
       return;
     }
@@ -63,21 +67,34 @@ class _RegisterFormState extends State<RegisterForm> {
             child: BlocConsumer<RegisterCubit, RegisterState>(
               listener: (context, state) {
                 if (state is RegisterSuccess) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Registration successful!')),
+                  FlushbarHelper.show(
+                    context,
+                    status: true,
+                    title: 'Success',
+                    content: 'Your account has been created successfully!',
                   );
                   Navigator.pushReplacementNamed(context, '/home');
                 } else if (state is RegisterUserNotInDb) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('User not in DB')),
+                  FlushbarHelper.show(
+                    context,
+                    status: false,
+                    title: 'User Not Found',
+                    content:
+                        'The entered email is not allowed. Use eve.holt@reqres.in.',
                   );
                 } else if (state is RegisterNoInternet) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('No Internet')),
+                  FlushbarHelper.show(
+                    context,
+                    status: false,
+                    title: 'Connection Error',
+                    content: 'No internet connection. Please try again later.',
                   );
                 } else if (state is RegisterFailure) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.message)),
+                  FlushbarHelper.show(
+                    context,
+                    status: false,
+                    title: 'Registration Failed',
+                    content: 'Something went wrong. Please try again.',
                   );
                 }
               },

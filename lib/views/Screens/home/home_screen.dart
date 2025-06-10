@@ -1,5 +1,6 @@
 import 'package:doodle/core/const/colors.dart';
 import 'package:doodle/core/const/text_styles.dart';
+import 'package:doodle/core/db/sharedPref/shared_pref_helper.dart';
 import 'package:doodle/core/view_model/user/user_cubit.dart';
 import 'package:doodle/models/user.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _logout(BuildContext context) {
+  void _logout(BuildContext context) async{
+     await SharedPrefHelper.clearToken();
     Navigator.pushReplacementNamed(context, '/login');
   }
 

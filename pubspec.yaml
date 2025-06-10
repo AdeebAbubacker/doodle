@@ -19,6 +19,8 @@ dependencies:
   http: ^1.4.0
   connectivity_plus: ^6.1.4
   dartz: ^0.10.1
+  shared_preferences: ^2.5.3
+  another_flushbar: ^1.12.30
 
 dev_dependencies:
   flutter_test:

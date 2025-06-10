@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:doodle/models/login_model.dart';
 import 'package:doodle/models/register_model.dart';
 import 'package:doodle/models/user.dart';
+import 'package:doodle/core/db/sharedPref/shared_pref_helper.dart';
 
 class ApiService extends BaseHttpService {
   final Map<String, String> _headers = {
@@ -23,7 +24,8 @@ class ApiService extends BaseHttpService {
 
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
-        final model = LoginModel.fromJson(json); 
+        final model = LoginModel.fromJson(json);
+        await SharedPrefHelper.saveToken(model.token ?? '');
         return Right(model);
       } else {
         return Left('Failed to login');
@@ -45,6 +47,7 @@ class ApiService extends BaseHttpService {
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
         final model = RegisterModel.fromJson(json);
+        await SharedPrefHelper.saveToken(model.token ?? '');
         return Right(model);
       } else if (response.statusCode == 400) {
         return Left(jsonDecode(response.body)['error'] ?? 'Bad request');
@@ -61,9 +64,8 @@ class ApiService extends BaseHttpService {
     try {
       final response = await get(url, _headers);
       if (response.statusCode == 200) {
-     
-         final json = jsonDecode(response.body);
-        final model = UserResponseModel.fromJson(json); 
+        final json = jsonDecode(response.body);
+        final model = UserResponseModel.fromJson(json);
         return Right(model);
       } else {
         return Left('Failed to load users');

@@ -9,16 +9,17 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeColor = AppColors.greenTheme;
 
     return BlocListener<SplashCubit, SplashState>(
       listener: (context, state) {
-        if (state == SplashState.loaded) {
+        if (state == SplashState.navigateToHome) {
+          Navigator.pushReplacementNamed(context, '/home');
+        } else if (state == SplashState.navigateToLogin) {
           Navigator.pushReplacementNamed(context, '/login');
         }
       },
       child: Scaffold(
-        backgroundColor: themeColor,
+        backgroundColor: AppColors.greenTheme,
         body: SafeArea(
           child: Center(
             child: Column(
