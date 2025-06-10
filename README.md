@@ -4,9 +4,9 @@ readme_content = """
 # ✨ Doodle — Flutter MVVM App
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/your-username/doodle/splash_screenshot.png" alt="Splash Screen" width="250"/>
-  <img src="https://user-images.githubusercontent.com/your-username/doodle/login_screenshot.png" alt="Login Screen" width="250"/>
-  <img src="https://user-images.githubusercontent.com/your-username/doodle/home_screenshot.png" alt="Home Screen" width="250"/>
+  <img src="https://raw.githubusercontent.com/AdeebAbubacker/doodle/refs/heads/main/assets/6215174714104594939.jpg" alt="Splash Screen" width="250"/>
+  <img src="https://raw.githubusercontent.com/AdeebAbubacker/doodle/refs/heads/main/assets/6215174714104594937.jpg" alt="Login Screen" width="250"/>
+  <img src="https://raw.githubusercontent.com/AdeebAbubacker/doodle/refs/heads/main/assets/6215174714104594938.jpg" alt="Home Screen" width="250"/>
 </p>
 
 ---
