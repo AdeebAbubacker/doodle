@@ -1,3 +1,4 @@
+import 'package:doodle/core/const/colors.dart';
 import 'package:doodle/core/const/text_styles.dart';
 import 'package:doodle/core/view_model/user/user_cubit.dart';
 import 'package:doodle/models/user.dart';
@@ -15,7 +16,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // Delay the call to ensure context is ready
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<UserCubit>().fetchUsers(2);
     });
@@ -30,11 +30,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           'Welcome 👋',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: AppColors.white,
           ),
         ),
         backgroundColor: Colors.green.shade600,
@@ -42,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: const Icon(
               Icons.logout,
-              color: Colors.white,
+              color: AppColors.white,
             ),
             tooltip: 'Logout',
             onPressed: () => _logout(context),
@@ -56,8 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
           }
           if (state is UserNoInternet) {
             return RefreshIndicator(
-              backgroundColor: Colors.white,
-              color: Colors.green,
+              backgroundColor: AppColors.white,
+              color: AppColors.normalGreen,
               onRefresh: () async {
                 context.read<UserCubit>().fetchUsers(2);
               },
@@ -73,8 +74,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
           if (state is UserLoaded) {
             return RefreshIndicator(
-              backgroundColor: Colors.white,
-              color: Colors.green,
+              backgroundColor: AppColors.white,
+              color: AppColors.normalGreen,
               onRefresh: () async {
                 context.read<UserCubit>().fetchUsers(2);
               },
@@ -82,8 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(16),
                 itemCount: state.users.data?.length ?? 0,
                 itemBuilder: (context, index) {
-                  final user = state.users.data?[index] ?? "N/A";
-                  return _UserCard(user: user as User);
+                  final user = state.users.data?[index] ?? User();
+                  return _UserCard(user: user);
                 },
               ),
             );
@@ -94,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.error, color: Colors.red, size: 60),
+                  Icon(Icons.error, color: AppColors.red, size: 60),
                   const SizedBox(height: 12),
                   const Text(
                     'Oops! Something went wrong.',
@@ -131,8 +132,8 @@ class _UserCard extends StatelessWidget {
 
     return Card(
       elevation: 4,
-      color: Colors.white, // White card on light gray scaffold
-      shadowColor: Colors.black.withOpacity(0.5),
+      color: AppColors.white,
+      shadowColor: AppColors.black54,
       margin: const EdgeInsets.only(bottom: 16),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: ListTile(
@@ -142,7 +143,7 @@ class _UserCard extends StatelessWidget {
           radius: 26,
           backgroundImage: avatar.isNotEmpty ? NetworkImage(avatar) : null,
           child: avatar.isEmpty
-              ? const Icon(Icons.person, color: Colors.white)
+              ? const Icon(Icons.person, color: AppColors.white)
               : null,
         ),
         title: Text(
@@ -151,7 +152,7 @@ class _UserCard extends StatelessWidget {
         ),
         subtitle: Text(
           email,
-          style: const TextStyle(color: Colors.grey),
+          style: TextStyle(color: AppColors.grey),
         ),
         trailing: const Icon(Icons.arrow_forward_ios, size: 16),
       ),

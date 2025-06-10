@@ -93,10 +93,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         fit: BoxFit.contain,
                       ),
                     ),
-
                     const SizedBox(height: 8),
-
-                    // Title
                     Text(
                       'Create Account',
                       style: AppTextStyles.blackW700S26,
@@ -107,7 +104,6 @@ class _RegisterFormState extends State<RegisterForm> {
                       style: AppTextStyles.blackW500S16,
                     ),
                     const SizedBox(height: 32),
-
                     CustomTextField(
                       controller: _emailController,
                       focusNode: emailFocusNode,
@@ -117,13 +113,11 @@ class _RegisterFormState extends State<RegisterForm> {
                         child: Image.asset(
                           'assets/email.png',
                           width: 10,
-                        ), // or NetworkImage
+                        ),
                       ),
                       keyboardType: TextInputType.emailAddress,
                     ),
-
                     const SizedBox(height: 16),
-
                     CustomTextField(
                       controller: _passwordController,
                       focusNode: passwordFocusNode,
@@ -138,30 +132,27 @@ class _RegisterFormState extends State<RegisterForm> {
                       suffixiconvisble: Image.asset(
                         'assets/witness.png',
                         width: 10,
-                      ), //
+                      ),
                       suffixiconNotvisble: Image.asset(
                         'assets/hide.png',
                         width: 10,
-                      ), // or
+                      ),
                       isPassword: true,
                     ),
                     const SizedBox(height: 24),
-
                     CustomButton(
                       onPressed: _register,
                       label: 'Register',
                       isLoading: state is RegisterLoading,
                     ),
                     const SizedBox(height: 20),
-
-                    // Already have account
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text("Already have an account?"),
                         TextButton(
                           onPressed: () {
-                            Navigator.pop(context); // Back to login
+                            Navigator.pop(context);
                           },
                           child: const Text('Login'),
                         ),
