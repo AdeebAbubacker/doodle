@@ -1,6 +1,3 @@
-from pathlib import Path
-
-readme_content = """
 # ✨ Doodle — Flutter MVVM App
 
 <p align="center">

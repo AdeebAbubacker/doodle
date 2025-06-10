@@ -66,7 +66,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Registration successful!')),
                   );
-                  Navigator.pop(context);
+                  Navigator.pushReplacementNamed(context, '/home');
                 } else if (state is RegisterUserNotInDb) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('User not in DB')),
