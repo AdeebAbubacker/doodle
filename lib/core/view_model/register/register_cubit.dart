@@ -1,5 +1,5 @@
-import 'package:doodle/core/services/api_service.dart';
-import 'package:doodle/models/register_model.dart';
+import 'package:reqres/core/services/api_service.dart';
+import 'package:reqres/models/register_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 

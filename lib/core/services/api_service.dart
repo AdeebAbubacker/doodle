@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'package:doodle/core/utils/app_constants.dart';
-import 'package:doodle/core/connection/basehttp_servcie.dart';
+import 'package:reqres/core/utils/app_constants.dart';
+import 'package:reqres/core/connection/basehttp_servcie.dart';
 import 'package:dartz/dartz.dart';
-import 'package:doodle/models/login_model.dart';
-import 'package:doodle/models/register_model.dart';
-import 'package:doodle/models/user.dart';
-import 'package:doodle/core/db/sharedPref/shared_pref_helper.dart';
+import 'package:reqres/models/login_model.dart';
+import 'package:reqres/models/register_model.dart';
+import 'package:reqres/models/user.dart';
+import 'package:reqres/core/db/sharedPref/shared_pref_helper.dart';
 
 class ApiService extends BaseHttpService {
   final Map<String, String> _headers = {

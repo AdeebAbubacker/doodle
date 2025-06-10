@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:doodle/core/connection/connectivity_checker.dart';
+import 'package:reqres/core/connection/connectivity_checker.dart';
 import 'package:http/http.dart' as http;
 
 abstract class BaseHttpService {

@@ -1,4 +1,4 @@
-import 'package:doodle/core/const/colors.dart';
+import 'package:reqres/core/const/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {

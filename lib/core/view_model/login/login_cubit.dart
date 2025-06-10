@@ -1,4 +1,4 @@
-import 'package:doodle/models/login_model.dart';
+import 'package:reqres/models/login_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../services/api_service.dart';
 

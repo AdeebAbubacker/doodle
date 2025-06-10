@@ -1,9 +1,9 @@
 # ✨ reqres — Flutter MVVM App
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/AdeebAbubacker/reqres/refs/heads/main/assets/6215174714104594939.jpg" alt="Splash Screen" width="250"/>
-  <img src="https://raw.githubusercontent.com/AdeebAbubacker/reqres/refs/heads/main/assets/6215174714104594937.jpg" alt="Login Screen" width="250"/>
-  <img src="https://raw.githubusercontent.com/AdeebAbubacker/reqres/refs/heads/main/assets/6215174714104594938.jpg" alt="Home Screen" width="250"/>
+  <img src="https://raw.githubusercontent.com/AdeebAbubacker/doodle/refs/heads/main/assets/6215174714104594939.jpg" alt="Splash Screen" width="250"/>
+  <img src="https://raw.githubusercontent.com/AdeebAbubacker/doodle/refs/heads/main/assets/6215174714104594937.jpg" alt="Login Screen" width="250"/>
+  <img src="https://raw.githubusercontent.com/AdeebAbubacker/doodle/refs/heads/main/assets/6215174714104594938.jpg" alt="Home Screen" width="250"/>
 </p>
 
 ---

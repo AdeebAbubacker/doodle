@@ -1,8 +1,8 @@
-import 'package:doodle/core/const/text_styles.dart';
-import 'package:doodle/core/view_model/login/login_cubit.dart';
-import 'package:doodle/views/widget/custom_button.dart';
-import 'package:doodle/views/widget/custom_textfield.dart';
-import 'package:doodle/views/widget/flush_toast.dart';
+import 'package:reqres/core/const/text_styles.dart';
+import 'package:reqres/core/view_model/login/login_cubit.dart';
+import 'package:reqres/views/widget/custom_button.dart';
+import 'package:reqres/views/widget/custom_textfield.dart';
+import 'package:reqres/views/widget/flush_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:another_flushbar/flushbar.dart';

@@ -1,5 +1,5 @@
-import 'package:doodle/core/const/colors.dart';
-import 'package:doodle/core/const/text_styles.dart';
+import 'package:reqres/core/const/colors.dart';
+import 'package:reqres/core/const/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -30,7 +30,7 @@ class CustomButton extends StatelessWidget {
           ),
         ),
         child: isLoading
-            ?  CircularProgressIndicator(
+            ? CircularProgressIndicator(
                 color: AppColors.white,
                 strokeWidth: 2,
               )

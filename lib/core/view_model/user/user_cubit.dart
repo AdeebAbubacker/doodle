@@ -1,8 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:doodle/models/user.dart';
+import 'package:reqres/models/user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../services/api_service.dart';
-
 
 abstract class UserState {}
 
@@ -22,7 +21,6 @@ class UserError extends UserState {
   UserError(this.message);
 }
 
-
 class UserCubit extends Cubit<UserState> {
   final ApiService _apiService;
 
@@ -32,8 +30,8 @@ class UserCubit extends Cubit<UserState> {
     emit(UserLoading());
 
     try {
-
-      final Either<String, UserResponseModel> result = await _apiService.getUsers(page);
+      final Either<String, UserResponseModel> result =
+          await _apiService.getUsers(page);
 
       result.fold(
         (failure) {
@@ -44,7 +42,6 @@ class UserCubit extends Cubit<UserState> {
           }
         },
         (data) {
-        
           emit(UserLoaded(data));
         },
       );

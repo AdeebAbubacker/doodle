@@ -1,8 +1,8 @@
-import 'package:doodle/core/const/colors.dart';
-import 'package:doodle/core/const/text_styles.dart';
-import 'package:doodle/core/db/sharedPref/shared_pref_helper.dart';
-import 'package:doodle/core/view_model/user/user_cubit.dart';
-import 'package:doodle/models/user.dart';
+import 'package:reqres/core/const/colors.dart';
+import 'package:reqres/core/const/text_styles.dart';
+import 'package:reqres/core/db/sharedPref/shared_pref_helper.dart';
+import 'package:reqres/core/view_model/user/user_cubit.dart';
+import 'package:reqres/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,8 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _logout(BuildContext context) async{
-     await SharedPrefHelper.clearToken();
+  void _logout(BuildContext context) async {
+    await SharedPrefHelper.clearToken();
     Navigator.pushReplacementNamed(context, '/login');
   }
 

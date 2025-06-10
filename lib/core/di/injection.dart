@@ -1,7 +1,7 @@
-import 'package:doodle/core/services/api_service.dart';
-import 'package:doodle/core/view_model/login/login_cubit.dart';
-import 'package:doodle/core/view_model/register/register_cubit.dart';
-import 'package:doodle/core/view_model/user/user_cubit.dart';
+import 'package:reqres/core/services/api_service.dart';
+import 'package:reqres/core/view_model/login/login_cubit.dart';
+import 'package:reqres/core/view_model/register/register_cubit.dart';
+import 'package:reqres/core/view_model/user/user_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;

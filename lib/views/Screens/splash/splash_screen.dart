@@ -1,6 +1,6 @@
-import 'package:doodle/core/const/colors.dart';
-import 'package:doodle/core/const/text_styles.dart';
-import 'package:doodle/core/view_model/splash/splash_cubit.dart';
+import 'package:reqres/core/const/colors.dart';
+import 'package:reqres/core/const/text_styles.dart';
+import 'package:reqres/core/view_model/splash/splash_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,7 +9,6 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocListener<SplashCubit, SplashState>(
       listener: (context, state) {
         if (state == SplashState.navigateToHome) {
