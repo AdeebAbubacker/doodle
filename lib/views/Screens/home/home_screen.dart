@@ -1,13 +1,25 @@
 import 'package:doodle/core/const/text_styles.dart';
-import 'package:doodle/core/di/injection.dart';
-import 'package:doodle/core/services/api_service.dart';
 import 'package:doodle/core/view_model/user/user_cubit.dart';
 import 'package:doodle/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Delay the call to ensure context is ready
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<UserCubit>().fetchUsers(2);
+    });
+  }
 
   void _logout(BuildContext context) {
     Navigator.pushReplacementNamed(context, '/login');
@@ -15,96 +27,92 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => UserCubit(getIt<ApiService>())..fetchUsers(2),
-      child: Scaffold(
-        backgroundColor: Colors.grey.shade100,
-        appBar: AppBar(
-          title: const Text(
-            'Welcome 👋',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
+    return Scaffold(
+      backgroundColor: Colors.grey.shade100,
+      appBar: AppBar(
+        title: const Text(
+          'Welcome 👋',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.green.shade600,
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.logout,
               color: Colors.white,
             ),
-          ),
-          backgroundColor: Colors.green.shade600,
-          actions: [
-            IconButton(
-              icon: const Icon(
-                Icons.logout,
-                color: Colors.white,
+            tooltip: 'Logout',
+            onPressed: () => _logout(context),
+          )
+        ],
+      ),
+      body: BlocBuilder<UserCubit, UserState>(
+        builder: (context, state) {
+          if (state is UserLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (state is UserNoInternet) {
+            return RefreshIndicator(
+              backgroundColor: Colors.white,
+              color: Colors.green,
+              onRefresh: () async {
+                context.read<UserCubit>().fetchUsers(2);
+              },
+              child: ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                children: const [
+                  SizedBox(height: 100),
+                  Center(child: Text("No Internet")),
+                ],
               ),
-              tooltip: 'Logout',
-              onPressed: () => _logout(context),
-            )
-          ],
-        ),
-        body: BlocBuilder<UserCubit, UserState>(
-          builder: (context, state) {
-            if (state is UserLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (state is UserNoInternet) {
-              return RefreshIndicator(
-                backgroundColor: Colors.white,
-                color: Colors.green,
-                onRefresh: () async {
-                  context.read<UserCubit>().fetchUsers(2);
+            );
+          }
+
+          if (state is UserLoaded) {
+            return RefreshIndicator(
+              backgroundColor: Colors.white,
+              color: Colors.green,
+              onRefresh: () async {
+                context.read<UserCubit>().fetchUsers(2);
+              },
+              child: ListView.builder(
+                padding: const EdgeInsets.all(16),
+                itemCount: state.users.data?.length ?? 0,
+                itemBuilder: (context, index) {
+                  final user = state.users.data?[index] ?? "N/A";
+                  return _UserCard(user: user as User);
                 },
-                child: ListView(
-                  physics:
-                      const AlwaysScrollableScrollPhysics(), 
-                  children: const [
-                    SizedBox(height: 100),
-                    Center(child: Text("No Internet")),
-                  ],
-                ),
-              );
-            }
+              ),
+            );
+          }
 
-            if (state is UserLoaded) {
-              return RefreshIndicator(
-                backgroundColor: Colors.white,
-                color: Colors.green,
-                onRefresh: () async {
-                  context.read<UserCubit>().fetchUsers(2);
-                },
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: state.users.data?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    final user = state.users.data?[index] ?? "N/A";
-                    return _UserCard(user: user as User);
-                  },
-                ),
-              );
-            }
+          if (state is UserError) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.error, color: Colors.red, size: 60),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Oops! Something went wrong.',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 12),
+                  ElevatedButton.icon(
+                    onPressed: () => context.read<UserCubit>().fetchUsers(2),
+                    icon: const Icon(Icons.refresh),
+                    label: const Text('Try Again'),
+                  )
+                ],
+              ),
+            );
+          }
 
-            if (state is UserError) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.error, color: Colors.red, size: 60),
-                    const SizedBox(height: 12),
-                    const Text(
-                      'Oops! Something went wrong.',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    const SizedBox(height: 12),
-                    ElevatedButton.icon(
-                      onPressed: () => context.read<UserCubit>().fetchUsers(2),
-                      icon: const Icon(Icons.refresh),
-                      label: const Text('Try Again'),
-                    )
-                  ],
-                ),
-              );
-            }
-
-            return const SizedBox();
-          },
-        ),
+          return const SizedBox();
+        },
       ),
     );
   }
