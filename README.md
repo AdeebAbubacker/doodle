@@ -1,16 +1,17 @@
-# ✨ Doodle — Flutter MVVM App
+# ✨ reqres — Flutter MVVM App
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/AdeebAbubacker/doodle/refs/heads/main/assets/6215174714104594939.jpg" alt="Splash Screen" width="250"/>
-  <img src="https://raw.githubusercontent.com/AdeebAbubacker/doodle/refs/heads/main/assets/6215174714104594937.jpg" alt="Login Screen" width="250"/>
-  <img src="https://raw.githubusercontent.com/AdeebAbubacker/doodle/refs/heads/main/assets/6215174714104594938.jpg" alt="Home Screen" width="250"/>
+  <img src="https://raw.githubusercontent.com/AdeebAbubacker/reqres/refs/heads/main/assets/6215174714104594939.jpg" alt="Splash Screen" width="250"/>
+  <img src="https://raw.githubusercontent.com/AdeebAbubacker/reqres/refs/heads/main/assets/6215174714104594937.jpg" alt="Login Screen" width="250"/>
+  <img src="https://raw.githubusercontent.com/AdeebAbubacker/reqres/refs/heads/main/assets/6215174714104594938.jpg" alt="Home Screen" width="250"/>
 </p>
 
 ---
 
 ## 🚀 Project Overview
 
-**Doodle** is a clean, MVVM-structured Flutter app featuring:
+**reqres** is a clean, MVVM-structured Flutter app featuring:
+
 - ✅ BLoC/Cubit state management
 - ✅ GetIt for dependency injection
 - ✅ Screens: Splash → Login → Home
@@ -24,10 +25,10 @@
 
 ## 📌 Features
 
-- **Splash Screen** — Brand introduction with auto-navigation  
-- **Authentication Flow** — Login & registration (with error/no-internet handling)  
-- **Home Screen** — Fetch and display paginated user list with pull-to-refresh  
-- **Robust Architecture** — MVVM, dependency injection, clean error states  
+- **Splash Screen** — Brand introduction with auto-navigation
+- **Authentication Flow** — Login & registration (with error/no-internet handling)
+- **Home Screen** — Fetch and display paginated user list with pull-to-refresh
+- **Robust Architecture** — MVVM, dependency injection, clean error states
 
 ---
 
@@ -44,3 +45,4 @@ POST https://reqres.in/api/register
 
 # Get Users
 GET https://reqres.in/api/users?page=2
+```
