@@ -1,4 +1,5 @@
 import 'package:doodle/core/services/api_service.dart';
+import 'package:doodle/models/register_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 
@@ -9,8 +10,8 @@ class RegisterInitial extends RegisterState {}
 class RegisterLoading extends RegisterState {}
 
 class RegisterSuccess extends RegisterState {
-  final String token;
-  RegisterSuccess(this.token);
+  final RegisterModel registerModel;
+  RegisterSuccess(this.registerModel);
 }
 
 class RegisterFailure extends RegisterState {
@@ -31,7 +32,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(RegisterLoading());
 
     try {
-      final Either<String, Map<String, dynamic>> result =
+      final Either<String, RegisterModel> result =
           await _apiService.register(email, password);
 
       result.fold(
@@ -46,8 +47,8 @@ class RegisterCubit extends Cubit<RegisterState> {
           }
         },
         (data) {
-          if (data['token'] != null) {
-            emit(RegisterSuccess(data['token']));
+          if (data.token != null) {
+            emit(RegisterSuccess(data));
           } else {
             emit(RegisterFailure('Invalid response from server'));
           }

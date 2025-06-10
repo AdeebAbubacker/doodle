@@ -1,3 +1,4 @@
+import 'package:doodle/models/login_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../services/api_service.dart';
 
@@ -10,8 +11,8 @@ class LoginLoading extends LoginState {}
 class NoInternetFailure extends LoginState {}
 
 class LoginSuccess extends LoginState {
-  final String token;
-  LoginSuccess(this.token);
+  final LoginModel loginModel;
+  LoginSuccess(this.loginModel);
 }
 
 class LoginFailure extends LoginState {
@@ -40,8 +41,8 @@ class LoginCubit extends Cubit<LoginState> {
         }
       },
       (data) {
-        if (data['token'] != null) {
-          emit(LoginSuccess(data['token']));
+        if (data.token != null) {
+          emit(LoginSuccess(data));
         } else {
           emit(LoginFailure('Invalid credentials'));
         }

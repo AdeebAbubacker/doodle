@@ -13,7 +13,7 @@ class UserLoading extends UserState {}
 class UserNoInternet extends UserState {}
 
 class UserLoaded extends UserState {
-  final List<User> users;
+  final UserResponseModel users;
   UserLoaded(this.users);
 }
 
@@ -22,7 +22,7 @@ class UserError extends UserState {
   UserError(this.message);
 }
 
-// Cubit
+
 class UserCubit extends Cubit<UserState> {
   final ApiService _apiService;
 
@@ -32,8 +32,8 @@ class UserCubit extends Cubit<UserState> {
     emit(UserLoading());
 
     try {
-      // Assuming your ApiService.getUsers returns Either<String, List<dynamic>>
-      final Either<String, List<dynamic>> result = await _apiService.getUsers(page);
+
+      final Either<String, UserResponseModel> result = await _apiService.getUsers(page);
 
       result.fold(
         (failure) {
@@ -44,8 +44,8 @@ class UserCubit extends Cubit<UserState> {
           }
         },
         (data) {
-          final users = data.map((u) => User.fromJson(u)).toList();
-          emit(UserLoaded(users));
+        
+          emit(UserLoaded(data));
         },
       );
     } catch (e) {

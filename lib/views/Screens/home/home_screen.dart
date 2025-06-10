@@ -45,7 +45,21 @@ class HomeScreen extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             }
             if (state is UserNoInternet) {
-              return const Center(child: Text("No Internet"));
+              return RefreshIndicator(
+                backgroundColor: Colors.white,
+                color: Colors.green,
+                onRefresh: () async {
+                  context.read<UserCubit>().fetchUsers(2);
+                },
+                child: ListView(
+                  physics:
+                      const AlwaysScrollableScrollPhysics(), 
+                  children: const [
+                    SizedBox(height: 100),
+                    Center(child: Text("No Internet")),
+                  ],
+                ),
+              );
             }
 
             if (state is UserLoaded) {
@@ -57,10 +71,10 @@ class HomeScreen extends StatelessWidget {
                 },
                 child: ListView.builder(
                   padding: const EdgeInsets.all(16),
-                  itemCount: state.users.length,
+                  itemCount: state.users.data?.length ?? 0,
                   itemBuilder: (context, index) {
-                    final user = state.users[index];
-                    return _UserCard(user: user);
+                    final user = state.users.data?[index] ?? "N/A";
+                    return _UserCard(user: user as User);
                   },
                 ),
               );

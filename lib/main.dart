@@ -9,10 +9,13 @@ import 'package:doodle/views/Screens/login/login_screen.dart';
 import 'package:doodle/views/Screens/register/register_screen.dart';
 import 'package:doodle/views/Screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   setup();
   runApp(MyApp());
 }
