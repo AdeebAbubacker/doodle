@@ -56,7 +56,7 @@ class LoginScreen extends StatelessWidget {
 
                   const SizedBox(height: 32),
 
-                  // Title
+                
                   Text(
                     'Welcome Back',
                     style: AppTextStyles.blackW700S26,
@@ -77,7 +77,7 @@ class LoginScreen extends StatelessWidget {
                       child: Image.asset(
                         'assets/email.png',
                         width: 10,
-                      ), // or NetworkImage
+                      ), 
                     ),
                     keyboardType: TextInputType.emailAddress,
                   ),
@@ -93,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                       child: Image.asset(
                         'assets/padlock.png',
                         width: 10,
-                      ), // or NetworkImage
+                      ),
                     ),
                     suffixiconvisble: Image.asset(
                       'assets/witness.png',
@@ -102,13 +102,12 @@ class LoginScreen extends StatelessWidget {
                     suffixiconNotvisble: Image.asset(
                       'assets/hide.png',
                       width: 10,
-                    ), // or
+                    ),
                     isPassword: true,
                   ),
 
                   const SizedBox(height: 24),
 
-                  // Login Button
                   BlocBuilder<LoginCubit, LoginState>(
                     builder: (context, state) {
                       return CustomButton(
@@ -125,7 +124,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
 
-                  // Register prompt
+             
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
